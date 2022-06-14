@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:game/Constants/dimens.dart';
 
 class Ball extends StatelessWidget {
   const Ball({Key? key, this.color, required this.value}) : super(key: key);

@@ -38,6 +38,10 @@ class _GameRouteState extends State<GameRoute> {
   @override
   Widget build(BuildContext context) {
     if (strikes == 3) {
+      setState(() {
+        balls = -1;
+      });
+
       Future.delayed(Duration.zero, () {
         showAlertDialog(context);
       });
@@ -133,8 +137,6 @@ class _GameRouteState extends State<GameRoute> {
   }
 
   Widget _restartGame() {
-    print('Game restart');
-
     return TextButton(
         onPressed: () {
           setState(() {
@@ -198,7 +200,6 @@ class _GameRouteState extends State<GameRoute> {
     for (int i = 0; i < str.length; i++) {
       if (str2.contains(str[i])) {
         uniqueList.add(str[i]);
-        print("val : ${str[i]}");
       }
     }
     setState(() {
@@ -261,13 +262,8 @@ class _GameRouteState extends State<GameRoute> {
     }
   }
 
- 
   showAlertDialog(BuildContext context) {
     // set up the button
-    Widget okButton = TextButton(
-      child: Text("OK"),
-      onPressed: () {},
-    );
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(

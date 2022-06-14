@@ -15,7 +15,6 @@ class NumberValidator {
     b = random();
     c = random();
 
-    print('First time a: $a, b: $b, c: $c');
 
     if (a == c || a == b) {
       if (a < 6) {
@@ -48,7 +47,6 @@ class NumberValidator {
         }
       }
     }
-    print('Second time a: $a, b: $b, c: $c');
     return a * 100 + b * 10 + c;
   }
 

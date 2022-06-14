@@ -12,26 +12,35 @@ class EditGuess extends StatelessWidget {
     return TextFormField(
       controller: controller,
       validator: (value) {
+        if (value!.contains('.')) {
+          return 'Only numbers are allowed';
+        }
+
         hasRepeatedDigits = false;
         if (value!.isEmpty) {
           return 'Please enter a number';
         } else {
+          value = value.replaceAll('.', '');
           if (value.length == 3) {
             if (NumberValidator.isNumeric(value)) {
-              var input = value;
-              var chars = input.toLowerCase().split('');
-              var counts = <String, int>{};
-              for (var char in chars) {
-                counts[char] = (counts[char] ?? 0) + 1;
-              }
-              for (var value in counts.values) {
-                if (value > 1) {
-                  hasRepeatedDigits = true;
+              if (!isInteger(int.parse(value))) {
+                var input = value;
+                var chars = input.toLowerCase().split('');
+                var counts = <String, int>{};
+                for (var char in chars) {
+                  counts[char] = (counts[char] ?? 0) + 1;
                 }
-              }
+                for (var value in counts.values) {
+                  if (value > 1) {
+                    hasRepeatedDigits = true;
+                  }
+                }
 
-              if (hasRepeatedDigits) {
-                return 'Invalid! Repeated digits not allowed';
+                if (hasRepeatedDigits) {
+                  return 'Invalid! Repeated digits not allowed';
+                } else {
+                  return 'Invalid! Only numbers allowed';
+                }
               }
             } else {
               return 'Invalid! Only numbers allowed';
@@ -69,3 +78,5 @@ Widget _suffixIcon(TextEditingController controller) {
     },
   );
 }
+
+bool isInteger(num value) => value is int || value == value.roundToDouble();
